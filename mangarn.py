@@ -10,8 +10,8 @@ def change_name(file,level):
 		file_ext = lists[1]
 		if file_ext in img_ext:
 			i = string.atoi(file_name)
-			new_filename = '%03d'%i
-			newfile = new_filename +'.'+ file_ext
+			new_file_name = '%03d'%i
+			newfile = new_file_name +'.'+ file_ext
 			print 'changeing '+file+' to '+ newfile
 			os.rename(file,newfile)
 
