@@ -22,7 +22,8 @@ def change_name(file):
 		file_list = file.split('.')
 		file_list_len = len(file_list)
 		file_ext = file_list[file_list_len -1]
-		file_name = file_list[0]
+		file_name = '.'.join(file_list[0:file_list_len-1])
+
 
 		#deal with the picture
 		if file_ext in img_ext:
@@ -38,7 +39,6 @@ def change_name(file):
 
 			
 def main(argv):
-
 	#deal with opts
 	try:
 		opts,args =\
