@@ -16,7 +16,7 @@ level = 3              #example level = 3 then 1.jpg => 001.jpg
 def usage():
 	print 'usage:%s [-hsl] [arg]'%appname
 
-def change_name(file,level):
+def change_name(file):
 	if os.path.isfile(file):
 		#deal with file name
 		file_list = file.split('.')
@@ -51,14 +51,16 @@ def main(argv):
 			usage()
 			sys.exit()
 		elif opt in ('-s','--silent'):
+			global show_infomation
 			show_infomation = False
 		elif opt in ('-l','--level'):
+			global level
 			level = string.atoi(arg)
 	
 	dir = os.getcwd()
 	files = os.listdir(dir)
 	for file in files:
-		change_name(file,level)
+		change_name(file)
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
