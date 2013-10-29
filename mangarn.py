@@ -8,6 +8,7 @@ import re
 
 #default settings
 appname = 'mangarn'
+version = '0.1'
 img_ext = ['jpg','jpeg','png']
 
 show_infomation = True #contorls if the program 
