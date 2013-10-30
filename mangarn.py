@@ -67,7 +67,14 @@ def main(argv):
 			show_infomation = False
 		elif opt in ('-l','--level'):
 			global level
-			level = string.atoi(arg)
+			# to see if the arg is only a number
+			p = re.compile(r"[0-9]+")
+			m = p.match(arg)
+			if m:
+				level = string.atoi(arg)
+			else:
+				print '%s:wrong argument'%appname 
+				sys.exit(2)
 		elif opt in ('-p','--prefix'):
 			global prefix
 			prefix = arg
