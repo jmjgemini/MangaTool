@@ -6,6 +6,14 @@ import sys
 import getopt
 import re
 
+class bcolors:
+	YELLOW = '\033[93m'
+	ENDC = '\033[0m'
+
+	def disable(self):
+		self.YELLOW =''
+		self.ENDC = ''
+
 #default settings
 appname = 'mangarn'
 version = '0.1'
@@ -42,9 +50,11 @@ def change_name(file):
 			new_file_name = ('%%0%dd'%level)%i
 			newfile = prefix + new_file_name +'.'+ file_ext
 			if show_infomation:
-				print 	'{0: >10}'.format(file) +\
+				print 	bcolors.YELLOW +\
+					'{0: >10}'.format(file) +\
 					' => '+\
-					'{0: >10}'.format(newfile)
+					'{0: >10}'.format(newfile)+\
+					bcolors.ENDC
 			os.rename(file,newfile)
 
 
