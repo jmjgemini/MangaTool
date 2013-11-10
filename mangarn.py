@@ -17,12 +17,6 @@ class bcolors:
 
 
 class setting:
-	appname = 'magarn'
-	version = '0.1'
-	img_ext = ['jpg','jpeg','png']
-	show_infomation = True
-	level   = 3
-	prefix  = ''
 	@classmethod
 	def reset(cls):
 		cls.appname = 'magarn'
