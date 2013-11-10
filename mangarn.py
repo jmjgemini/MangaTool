@@ -20,7 +20,7 @@ class setting:
 	@classmethod
 	def reset(cls):
 		cls.appname = 'magarn'
-		cls.version = '0.1'
+		cls.version = '0.12'
 		cls.img_ext = ['jpg','jpeg','png']
 		cls.show_infomation = True
 		cls.level   = 3
@@ -67,8 +67,8 @@ def main(argv):
 	setting.reset()
 	try:
 		opts,args =\
-		getopt.getopt(argv,'hsl:p:',\
-		['help','silent','level=','prefix='])
+			getopt.getopt(argv,'hsl:e:p:',\
+		['help','silent','level=','ext=','prefix='])
 	except getopt.GetoptError:
 		usage()
 		sys.exit(2)
@@ -87,6 +87,8 @@ def main(argv):
 			else:
 				print '%s:wrong argument'%setting.appname 
 				sys.exit(2)
+		elif opt in ('-e','--ext'):
+			setting.img_ext = arg.split(',')
 		elif opt in ('-p','--prefix'):
 			setting.prefix = arg
 	
