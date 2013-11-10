@@ -6,6 +6,7 @@ import sys
 import getopt
 import re
 
+
 class bcolors:
 	YELLOW = '\033[93m'
 	ENDC = '\033[0m'
@@ -14,19 +15,26 @@ class bcolors:
 		self.YELLOW =''
 		self.ENDC = ''
 
-#default settings
-appname = 'mangarn'
-version = '0.1'
-img_ext = ['jpg','jpeg','png']
 
-show_infomation = True #contorls if the program 
-			#show infomation to stdout
-level = 3              #example level = 3 then 1.jpg => 001.jpg
+class setting:
+	appname = 'magarn'
+	version = '0.1'
+	img_ext = ['jpg','jpeg','png']
+	show_infomation = True
+	level   = 3
+	prefix  = ''
+	@classmethod
+	def reset(cls):
+		cls.appname = 'magarn'
+		cls.version = '0.1'
+		cls.img_ext = ['jpg','jpeg','png']
+		cls.show_infomation = True
+		cls.level   = 3
+		cls.prefix  = ''
 
-prefix=''		#prefix added to the changed filename
 
 def usage():
-	print 'usage:%s [-hsl] [arg]'%appname
+	print 'usage:%s [-hslp] [arg]'%setting.appname
 
 def change_name(file):
 	if os.path.isfile(file):
@@ -46,10 +54,11 @@ def change_name(file):
 			return
 
 		#deal with the picture
-		if file_ext in img_ext:
-			new_file_name = ('%%0%dd'%level)%i
-			newfile = prefix + new_file_name +'.'+ file_ext
-			if show_infomation:
+		if file_ext in setting.img_ext:
+			new_file_name = ('%%0%dd'%setting.level)%i
+			newfile = setting.prefix +\
+				new_file_name +'.'+ file_ext
+			if setting.show_infomation:
 				print 	bcolors.YELLOW +\
 					'{0: >10}'.format(file) +\
 					' => '+\
@@ -61,6 +70,7 @@ def change_name(file):
 			
 def main(argv):
 	#deal with opts
+	setting.reset()
 	try:
 		opts,args =\
 		getopt.getopt(argv,'hsl:p:',\
@@ -73,21 +83,18 @@ def main(argv):
 			usage()
 			sys.exit()
 		elif opt in ('-s','--silent'):
-			global show_infomation
-			show_infomation = False
+			setting.show_infomation = False
 		elif opt in ('-l','--level'):
-			global level
 			# to see if the arg is only a number
 			p = re.compile(r"[0-9]+")
 			m = p.match(arg)
 			if m:
-				level = string.atoi(arg)
+				setting.level = string.atoi(arg)
 			else:
-				print '%s:wrong argument'%appname 
+				print '%s:wrong argument'%setting.appname 
 				sys.exit(2)
 		elif opt in ('-p','--prefix'):
-			global prefix
-			prefix = arg
+			setting.prefix = arg
 	
 	dir = os.getcwd()
 	files = os.listdir(dir)
