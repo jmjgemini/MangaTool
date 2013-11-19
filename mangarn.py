@@ -6,7 +6,6 @@ import sys
 import getopt
 import re
 
-
 class bcolors:
 	YELLOW = '\033[93m'
 	ENDC = '\033[0m'
