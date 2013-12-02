@@ -25,7 +25,7 @@ class setting:
 		cls.level   = 3
 		cls.prefix  = ''
 
-
+		
 def usage():
 	print 'usage:%s [-hslp] [arg]'%setting.appname
 
